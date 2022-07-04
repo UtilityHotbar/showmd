@@ -20,6 +20,8 @@ def findstuff(elem):
             newstr += colored(child.text, attrs=['underline'])
         elif child.name == 'pre' or child.name == 'code':
             newstr += colored(child.text, attrs=['reverse'])
+        elif child.name == 'img':
+            newstr += colored('[Image] ' + child.get('alt'), 'yellow', attrs=['reverse'])
         else:
             newstr += child.text
     return newstr
