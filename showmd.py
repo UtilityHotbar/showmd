@@ -43,6 +43,8 @@ def makeart(text, font='medium'):
         next = ''
         done = len(curr_art.split('\n')[0]) <= TERM_WIDTH
         while not done:
+            if not curr_line:
+                break
             next = curr_line[-1] + next
             curr_line = curr_line[:-1]
             curr_art = art.text2art(curr_line, font=font)
