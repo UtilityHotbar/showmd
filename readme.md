@@ -14,4 +14,4 @@ Hackmd is a simple way to pretty-print markdown text in the terminal. It support
 If header ASCII art is too wide, it will automatically adjust to the width of the terminal if it can. It should also work on Windows and Linux terminals.
 
 ## Demo
-![Demonstration image](hackmd_demo.png)
+![Demonstration image](showmd_demo.png)
