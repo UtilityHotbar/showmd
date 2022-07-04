@@ -10,6 +10,10 @@ Showmd is a simple way to pretty-print markdown text in the terminal. It support
 ## Usage
 `python3 showmd.py myfile.md` - Displays `myfile.md`.
 
+Flags:
+
+* `--a`: Disables ASCII art headers.
+
 ## Advanced Features
 If header ASCII art is too wide, it will automatically adjust to the width of the terminal if it can. It should also work on Windows and Linux terminals.
 
