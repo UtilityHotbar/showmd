@@ -71,7 +71,7 @@ for elem in result.contents:
     if elem == '\n':
         continue
     if elem.name == 'h1':
-        print(colored(makeart(elem.text, font='big'), 'blue'))
+        print(colored(makeart(elem.text, font='medium'), 'blue'))
     elif elem.name == 'h2':
         print(colored(makeart(elem.text, font='small'), 'green'))
     elif elem.name == 'h3':
