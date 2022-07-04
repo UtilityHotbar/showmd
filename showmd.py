@@ -3,6 +3,7 @@ import art
 import markdown
 from bs4 import BeautifulSoup
 import colorama
+from numpy import True_
 from termcolor import colored
 import shutil
 
@@ -26,13 +27,14 @@ def findstuff(elem):
             newstr += child.text
     return newstr
 
-def makeart(text, font='medium'):
-    
+def makeart(text, font='medium', do_art=True):
+    if not do_art:
+        return colored(text, attrs=['reverse'])
+        # return text
     # Base case, just try to turn the text into art and see if it's too wide
     baseart = art.text2art(text, font=font)
     if len(baseart.split('\n')[0]) <= TERM_WIDTH:
         return baseart
-    print(TERM_WIDTH, len(baseart.split('\n')[0]))
     # Now go line by line, editing until its under terminal width
     lines = text.split('\n')
     i = 0
@@ -61,6 +63,7 @@ def makeart(text, font='medium'):
 
 parser = argparse.ArgumentParser(description='Display MD files.')
 parser.add_argument('filename', help='name of the file to display.')
+parser.add_argument('--a', dest='ascii', action='store_false', default=True, help='removes ascii art headers')
 
 args = parser.parse_args()
 
@@ -71,13 +74,13 @@ for elem in result.contents:
     if elem == '\n':
         continue
     if elem.name == 'h1':
-        print(colored(makeart(elem.text, font='medium'), 'blue'))
+        print(colored(makeart(elem.text, font='medium', do_art=args.ascii), 'blue'))
     elif elem.name == 'h2':
-        print(colored(makeart(elem.text, font='small'), 'green'))
+        print(colored(makeart(elem.text, font='small', do_art=args.ascii), 'green'))
     elif elem.name == 'h3':
-        print(colored(makeart(elem.text, font='small'), 'yellow'))
+        print(colored(makeart(elem.text, font='small', do_art=args.ascii), 'yellow'))
     elif elem.name.startswith('h'):
-        print(colored(makeart(elem.text, font='straight'), 'yellow'))
+        print(colored(makeart(elem.text, font='straight', do_art=args.ascii), 'yellow'))
     elif elem.name == 'ul':
         for child in elem.children:
             if child.text != '\n':
